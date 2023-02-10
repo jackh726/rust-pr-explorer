@@ -236,7 +236,7 @@ const TimeResolvedIssues: React.FC<{ issues: IssueState }> = ({ issues }) => {
 
   const timesData = { items: times };
 
-  const xDomain = [d3.timeDay.offset(d3.min(issuesData, d => d.date) as Date, -5), d3.timeDay.offset(d3.max(issuesData, d => d.date) as Date, 5)] as [Date, Date];
+  const xDomain = [d3.timeDay.offset(d3.min(times, d => d.date) as Date, -5), d3.timeDay.offset(d3.max(times, d => d.date) as Date, 5)] as [Date, Date];
   const hoveredItemData = hoveredItem && issuesData[hoveredItem.index];
   const hoveredItemParagraph = hoveredItemData
   ? (
@@ -392,7 +392,7 @@ const App = () => {
         <input type="text" placeholder="Github Token" style={{ width: '330px' }} onChange={event => setTokenInput(event.target.value === '' ? undefined : event.target.value) } />
         <button style={(tokenInput === undefined || tokenInput === '') ? { color: '#66666666' } : {}} onClick={doFetch}>Fetch Issues</button>
       </div>
-      <div style={{ width: '1600px', height: issues === undefined ? '800px' : `${issues.issues.length * 4}px` }}>
+      <div style={{ minWidth: '98vw', height: issues === undefined ? '800px' : `${issues.issues.length * 4}px` }}>
         {issues !== undefined && (
           <TimeResolvedIssues issues={issues} />
         )}
